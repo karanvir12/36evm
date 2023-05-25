@@ -34,9 +34,9 @@ use crate::{
 };
 use codec::{Decode, Encode};
 use futures::executor;
-use kitchensink_runtime::{
-	constants::currency::DOLLARS, AccountId, BalancesCall, CheckedExtrinsic, MinimumPeriod,
-	RuntimeCall, Signature, SystemCall, UncheckedExtrinsic,
+use node_5ire_runtime::{
+	constants::currency::DOLLARS, AccountId, BalancesCall, CheckedExtrinsic1, MinimumPeriod,
+	RuntimeCall, Signature, SystemCall, UncheckedExtrinsic1,
 };
 use node_primitives::Block;
 use sc_block_builder::BlockBuilderProvider;
@@ -301,16 +301,16 @@ impl<'a> Iterator for BlockContentIterator<'a> {
 		));
 
 		let signed = self.keyring.sign(
-			CheckedExtrinsic {
+			CheckedExtrinsic1 {
 				signed: Some((
 					sender,
-					signed_extra(0, kitchensink_runtime::ExistentialDeposit::get() + 1),
+					signed_extra(0, node_5ire_runtime::ExistentialDeposit::get() + 1),
 				)),
 				function: match self.content.block_type {
 					BlockType::RandomTransfersKeepAlive =>
 						RuntimeCall::Balances(BalancesCall::transfer_keep_alive {
 							dest: sp_runtime::MultiAddress::Id(receiver),
-							value: kitchensink_runtime::ExistentialDeposit::get() + 1,
+							value: node_5ire_runtime::ExistentialDeposit::get() + 1,
 						}),
 					BlockType::RandomTransfersReaping => {
 						RuntimeCall::Balances(BalancesCall::transfer {
@@ -318,7 +318,7 @@ impl<'a> Iterator for BlockContentIterator<'a> {
 							// Transfer so that ending balance would be 1 less than existential
 							// deposit so that we kill the sender account.
 							value: 100 * DOLLARS -
-								(kitchensink_runtime::ExistentialDeposit::get() - 1),
+								(node_5ire_runtime::ExistentialDeposit::get() - 1),
 						})
 					},
 					BlockType::Noop =>
@@ -560,11 +560,11 @@ impl BenchKeyring {
 	/// Sign transaction with keypair from this keyring.
 	pub fn sign(
 		&self,
-		xt: CheckedExtrinsic,
+		xt: CheckedExtrinsic1,
 		spec_version: u32,
 		tx_version: u32,
 		genesis_hash: [u8; 32],
-	) -> UncheckedExtrinsic {
+	) -> UncheckedExtrinsic1 {
 		match xt.signed {
 			Some((signed, extra)) => {
 				let payload = (
@@ -583,19 +583,19 @@ impl BenchKeyring {
 						key.sign(b)
 					}
 				});
-				UncheckedExtrinsic {
+				UncheckedExtrinsic1 {
 					signature: Some((sp_runtime::MultiAddress::Id(signed), signature, extra)),
 					function: payload.0,
 				}
 			},
-			None => UncheckedExtrinsic { signature: None, function: xt.function },
+			None => UncheckedExtrinsic1 { signature: None, function: xt.function },
 		}
 	}
 
 	/// Generate genesis with accounts from this keyring endowed with some balance.
-	pub fn generate_genesis(&self) -> kitchensink_runtime::GenesisConfig {
+	pub fn generate_genesis(&self) -> node_5ire_runtime::GenesisConfig {
 		crate::genesis::config_endowed(
-			Some(kitchensink_runtime::wasm_binary_unwrap()),
+			Some(node_5ire_runtime::wasm_binary_unwrap()),
 			self.collect_account_ids(),
 		)
 	}

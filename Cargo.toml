@@ -1,10 +1,5 @@
 [workspace]
-resolver = "2"
-
 members = [
-	"bin/node-template/node",
-	"bin/node-template/pallets/template",
-	"bin/node-template/runtime",
 	"bin/node/bench",
 	"bin/node/cli",
 	"bin/node/executor",
@@ -245,6 +240,43 @@ members = [
 	"utils/frame/rpc/client",
 	"utils/prometheus",
 	"utils/wasm-builder",
+
+# EVM 
+
+	"evm-client/cli",
+	"evm-client/consensus",
+	"evm-client/db",
+	"evm-client/mapping-sync",
+	"evm-client/rpc",
+	"evm-client/rpc-core",
+
+	"evm-frame/base-fee",
+	"evm-frame/dynamic-fee",
+	"evm-frame/ethereum",
+	"evm-frame/evm",
+	"evm-frame/evm-chain-id",
+	"evm-frame/evm/test-vector-support",
+	"evm-frame/evm/precompile/blake2",
+	"evm-frame/evm/precompile/bn128",
+	"evm-frame/evm/precompile/curve25519",
+	"evm-frame/evm/precompile/dispatch",
+	"evm-frame/evm/precompile/ed25519",
+	"evm-frame/evm/precompile/modexp",
+	"evm-frame/evm/precompile/sha3fips",
+	"evm-frame/evm/precompile/simple",
+	"evm-frame/hotfix-sufficients",
+
+	"evm-primitives/consensus",
+	"evm-primitives/dynamic-fee",
+	"evm-primitives/ethereum",
+	"evm-primitives/evm",
+	"evm-primitives/rpc",
+	"evm-primitives/self-contained",
+	"evm-primitives/storage",
+
+
+
+
 ]
 
 # The list of dependencies below (which can be both direct and indirect dependencies) are crates

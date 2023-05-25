@@ -1,0 +1,23 @@
+[package]
+name = "fp-dynamic-fee"
+version = "1.0.0"
+license = "Apache-2.0"
+edition = "2021"
+description = "Dynamic fee inherent primitives for Ethereum RPC (web3) compatibility layer for Substrate."
+ 
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+async-trait = "0.1"
+# Substrate
+sp-core = { version = "7.0.0", path = "../../primitives/core", default-features = false }
+sp-inherents = { version = "4.0.0-dev", path = "../../primitives/inherents", default-features = false }
+
+[features]
+default = ["std"]
+std = [
+	# Substrate
+	"sp-core/std",
+	"sp-inherents/std",
+]

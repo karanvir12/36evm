@@ -1,12 +1,12 @@
 [package]
 name = "node-cli"
 version = "3.0.0-dev"
-authors = ["Parity Technologies <admin@parity.io>"]
-description = "Generic Substrate node implementation in Rust."
+authors = ["peer"]
 build = "build.rs"
+description = "Generic Substrate node implementation in Rust."
 edition = "2021"
 license = "GPL-3.0-or-later WITH Classpath-exception-2.0"
-default-run = "substrate"
+default-run = "peer"
 homepage = "https://substrate.io"
 repository = "https://github.com/paritytech/substrate/"
 publish = false
@@ -26,7 +26,7 @@ is-it-maintained-issue-resolution = { repository = "paritytech/substrate" }
 is-it-maintained-open-issues = { repository = "paritytech/substrate" }
 
 [[bin]]
-name = "substrate"
+name = "peer"
 path = "bin/main.rs"
 required-features = ["cli"]
 
@@ -41,6 +41,7 @@ codec = { package = "parity-scale-codec", version = "3.0.0" }
 serde = { version = "1.0.136", features = ["derive"] }
 jsonrpsee = { version = "0.16.2", features = ["server"] }
 futures = "0.3.21"
+hex-literal = "0.3.4"
 log = "0.4.17"
 rand = "0.8"
 
@@ -60,6 +61,20 @@ sp-consensus = { version = "0.10.0-dev", path = "../../../primitives/consensus/c
 sp-transaction-pool = { version = "4.0.0-dev", path = "../../../primitives/transaction-pool" }
 sp-transaction-storage-proof = { version = "4.0.0-dev", path = "../../../primitives/transaction-storage-proof" }
 sp-io = { path = "../../../primitives/io" }
+
+# Frontier
+fc-cli = { path = "../../../evm-client/cli" }
+fc-consensus = { path = "../../../evm-client/consensus" }
+fc-db = { path = "../../../evm-client/db" }
+fc-mapping-sync = { path = "../../../evm-client/mapping-sync" }
+fc-rpc = { path = "../../../evm-client/rpc" }
+fc-rpc-core = { path = "../../../evm-client/rpc-core" }
+fp-consensus = { path = "../../../evm-primitives/consensus" }
+fp-dynamic-fee = { path = "../../../evm-primitives/dynamic-fee" }
+fp-evm = { path = "../../../evm-primitives/evm" }
+fp-rpc = { path = "../../../evm-primitives/rpc" }
+fp-storage = { path = "../../../evm-primitives/storage" }
+
 
 # client dependencies
 sc-client-api = { version = "4.0.0-dev", path = "../../../client/api" }
@@ -82,6 +97,23 @@ sc-authority-discovery = { version = "0.10.0-dev", path = "../../../client/autho
 sc-sync-state-rpc = { version = "0.10.0-dev", path = "../../../client/sync-state-rpc" }
 sc-sysinfo = { version = "6.0.0-dev", path = "../../../client/sysinfo" }
 
+
+
+sc-consensus-epochs = { version = "0.10.0-dev", path = "../../../client/consensus/epochs" }
+sc-rpc-api = { version = "0.10.0-dev", path = "../../../client/rpc-api" }
+
+# sc-finality-grandpa = { version = "0.10.0-dev", path = "../../../client/finality-grandpa" }
+sc-finality-grandpa-rpc = { version = "0.10.0-dev", path = "../../../client/finality-grandpa/rpc" }
+sp-block-builder = { version = "4.0.0-dev", path = "../../../primitives/block-builder" }
+sp-blockchain = { version = "4.0.0-dev", path = "../../../primitives/blockchain" }
+#pallet-contracts-rpc = { version = "4.0.0-dev", path = "../../../frame/contracts/rpc/" }
+# pallet-mmr-rpc = { version = "3.0.0", path = "../../../frame/merkle-mountain-range/rpc/" }
+pallet-transaction-payment-rpc = { version = "4.0.0-dev", path = "../../../frame/transaction-payment/rpc/" }
+sc-consensus-babe-rpc = { version = "0.10.0-dev", path = "../../../client/consensus/babe/rpc" }
+substrate-frame-rpc-system = { version = "4.0.0-dev", path = "../../../utils/frame/rpc/system" }
+substrate-state-trie-migration-rpc = { version = "4.0.0-dev", path = "../../../utils/frame/rpc/state-trie-migration-rpc/" }
+
+
 # frame dependencies
 frame-system = { version = "4.0.0-dev", path = "../../../frame/system" }
 frame-system-rpc-runtime-api = { version = "4.0.0-dev", path = "../../../frame/system/rpc/runtime-api" }
@@ -89,10 +121,11 @@ pallet-transaction-payment = { version = "4.0.0-dev", path = "../../../frame/tra
 pallet-assets = { version = "4.0.0-dev", path = "../../../frame/assets/" }
 pallet-asset-tx-payment = { version = "4.0.0-dev", path = "../../../frame/transaction-payment/asset-tx-payment/" }
 pallet-im-online = { version = "4.0.0-dev", default-features = false, path = "../../../frame/im-online" }
+frame-benchmarking = { version = "4.0.0-dev", default-features = false, optional = true, path = "../../../frame/benchmarking" }
 
 # node-specific dependencies
-kitchensink-runtime = { version = "3.0.0-dev", path = "../runtime" }
-node-rpc = { version = "3.0.0-dev", path = "../rpc" }
+node-5ire-runtime = { version = "3.0.0-dev", path = "../runtime" }
+# node-rpc = { version = "3.0.0-dev", path = "../rpc" }
 node-primitives = { version = "2.0.0", path = "../primitives" }
 node-executor = { version = "3.0.0-dev", path = "../executor" }
 
@@ -103,6 +136,13 @@ node-inspect = { version = "0.9.0-dev", optional = true, path = "../inspect" }
 try-runtime-cli = { version = "0.10.0-dev", optional = true, path = "../../../utils/frame/try-runtime/cli" }
 serde_json = "1.0.85"
 
+
+# [target.'cfg(any(target_arch="x86_64", target_arch="aarch64"))'.dependencies]
+#node-executor = { version = "3.0.0-dev", path = "../executor", features = ["wasmtime"] }
+#sc-cli = { version = "0.10.0-dev", optional = true, path = "../../../client/cli", features = ["wasmtime"] }
+#sc-service = { version = "0.10.0-dev", default-features = false, path = "../../../client/service", features = ["wasmtime",] }
+#sp-trie = { version = "7.0.0", default-features = false, path = "../../../primitives/trie", features = ["memory-tracker",] }
+
 [dev-dependencies]
 sc-keystore = { version = "4.0.0-dev", path = "../../../client/keystore" }
 sc-client-db = { version = "0.10.0-dev", path = "../../../client/db" }
@@ -112,7 +152,7 @@ sc-consensus-epochs = { version = "0.10.0-dev", path = "../../../client/consensu
 sc-service-test = { version = "2.0.0", path = "../../../client/service/test" }
 sc-block-builder = { version = "0.10.0-dev", path = "../../../client/block-builder" }
 sp-tracing = { version = "6.0.0", path = "../../../primitives/tracing" }
-sp-blockchain = { version = "4.0.0-dev", path = "../../../primitives/blockchain" }
+#sp-blockchain = { version = "4.0.0-dev", path = "../../../primitives/blockchain" }
 futures = "0.3.21"
 tempfile = "3.1.0"
 assert_cmd = "2.0.2"
@@ -120,11 +160,13 @@ nix = "0.23"
 serde_json = "1.0"
 regex = "1.6.0"
 platforms = "2.0"
+async-std = { version = "1.11.0", features = ["attributes"] }
 soketto = "0.7.1"
 criterion = { version = "0.3.5", features = ["async_tokio"] }
 tokio = { version = "1.22.0", features = ["macros", "time", "parking_lot"] }
 tokio-util = { version = "0.7.4", features = ["compat"] }
 wait-timeout = "0.2"
+#remote-externalities = { path = "../../../utils/frame/remote-externalities" }
 substrate-rpc-client = { path = "../../../utils/frame/rpc/client" }
 pallet-timestamp = { version = "4.0.0-dev", path = "../../../frame/timestamp" }
 
@@ -142,6 +184,7 @@ pallet-balances = { version = "4.0.0-dev", path = "../../../frame/balances" }
 [features]
 default = ["cli"]
 cli = [
+	# "node-executor/wasmi-errno",
 	"node-inspect",
 	"sc-cli",
 	"frame-benchmarking-cli",
@@ -151,14 +194,17 @@ cli = [
 	"clap_complete",
 	"substrate-build-script-utils",
 	"try-runtime-cli",
+	"frame-benchmarking/std",
 ]
 runtime-benchmarks = [
-	"kitchensink-runtime/runtime-benchmarks",
-	"frame-benchmarking-cli/runtime-benchmarks"
+	"node-5ire-runtime/runtime-benchmarks",
+	"frame-benchmarking-cli/runtime-benchmarks",
+	"frame-benchmarking/runtime-benchmarks"
 ]
 # Enable features that allow the runtime to be tried and debugged. Name might be subject to change
 # in the near future.
-try-runtime = ["kitchensink-runtime/try-runtime", "try-runtime-cli/try-runtime"]
+#rpc_binary_search_estimate = ["fc-rpc/rpc_binary_search_estimate"]
+try-runtime = ["node-5ire-runtime/try-runtime", "try-runtime-cli/try-runtime"]
 
 [[bench]]
 name = "transaction_pool"

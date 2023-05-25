@@ -1,0 +1,40 @@
+[package]
+name = "pallet-evm-precompile-dispatch"
+version = "2.0.0-dev"
+license = "Apache-2.0"
+edition = "2021"
+description = "DISPATCH precompiles for EVM pallet."
+ 
+[dependencies]
+# Substrate
+frame-support = { version = "4.0.0-dev", path = "../../../../frame/support" , default-features = false }
+# Frontier
+fp-evm = { version = "3.0.0-dev", path = "../../../../evm-primitives/evm", default-features = false }
+pallet-evm = { version = "6.0.0-dev", path = "../..", default-features = false }
+
+[dev-dependencies]
+scale-codec = { package = "parity-scale-codec", version = "3.2.1", default-features = false, features = ["derive"] }
+scale-info = { version = "2.3.1", default-features = false, features = ["derive"] }
+# Substrate
+frame-system = { version = "4.0.0-dev", path = "../../../../frame/system", default-features = false }
+pallet-timestamp = { version = "4.0.0-dev", path = "../../../../frame/timestamp",default-features = false }
+pallet-balances = { version = "4.0.0-dev",  path = "../../../../frame/balances", default-features = false }
+pallet-utility = { version = "4.0.0-dev", path = "../../../../frame/utility", default-features = false }
+sp-core = { version = "7.0.0", path = "../../../../primitives/core", default-features = false }
+sp-io = { version = "7.0.0", path = "../../../../primitives/io", default-features = false}
+sp-runtime = { version = "7.0.0", default-features = false, path = "../../../../primitives/runtime" }
+sp-std = { version = "5.0.0",path = "../../../../primitives/std", default-features = false }
+
+[features]
+default = ["std"]
+std = [
+	# Substrate
+	"frame-support/std",
+	# Frontier
+	"fp-evm/std",
+	"pallet-evm/std",
+	"pallet-balances/std",
+	"pallet-utility/std"
+
+
+]

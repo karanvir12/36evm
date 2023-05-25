@@ -19,7 +19,7 @@
 //! Test accounts.
 
 use codec::Encode;
-use kitchensink_runtime::{CheckedExtrinsic, SessionKeys, SignedExtra, UncheckedExtrinsic};
+use node_5ire_runtime::{CheckedExtrinsic1, SessionKeys, SignedExtra, UncheckedExtrinsic1};
 use node_primitives::{AccountId, Balance, Index};
 use sp_keyring::{AccountKeyring, Ed25519Keyring, Sr25519Keyring};
 use sp_runtime::generic::Era;
@@ -77,17 +77,17 @@ pub fn signed_extra(nonce: Index, extra_fee: Balance) -> SignedExtra {
 		frame_system::CheckEra::from(Era::mortal(256, 0)),
 		frame_system::CheckNonce::from(nonce),
 		frame_system::CheckWeight::new(),
-		pallet_asset_tx_payment::ChargeAssetTxPayment::from(extra_fee, None),
+		pallet_asset_tx_payment::ChargeAssetTxPayment::from(extra_fee, None),		
 	)
 }
 
-/// Sign given `CheckedExtrinsic`.
+/// Sign given `CheckedExtrinsic1`.
 pub fn sign(
-	xt: CheckedExtrinsic,
+	xt: CheckedExtrinsic1,
 	spec_version: u32,
 	tx_version: u32,
 	genesis_hash: [u8; 32],
-) -> UncheckedExtrinsic {
+) -> UncheckedExtrinsic1 {
 	match xt.signed {
 		Some((signed, extra)) => {
 			let payload =
@@ -102,11 +102,11 @@ pub fn sign(
 					}
 				})
 				.into();
-			UncheckedExtrinsic {
+			UncheckedExtrinsic1 {
 				signature: Some((sp_runtime::MultiAddress::Id(signed), signature, extra)),
 				function: payload.0,
 			}
 		},
-		None => UncheckedExtrinsic { signature: None, function: xt.function },
+		None => UncheckedExtrinsic1 { signature: None, function: xt.function },
 	}
 }

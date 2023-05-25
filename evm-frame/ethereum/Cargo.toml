@@ -1,0 +1,83 @@
+[package]
+name = "pallet-ethereum"
+version = "4.0.0-dev"
+license = "Apache-2.0"
+edition = "2021"
+description = "Ethereum compatibility full block processing emulation pallet for Substrate."
+ 
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+ethereum = { version = "0.14.0", default-features = false }
+ethereum-types = { version = "0.14.1", default-features = false }
+evm = { version = "0.37.0", default-features = false }
+rlp = { version = "0.5", default-features = false }
+scale-codec = { package = "parity-scale-codec", version = "3.2.1", default-features = false, features = ["derive"] }
+scale-info = { version = "2.3.1", default-features = false, features = ["derive"] }
+
+# Substrate
+sp-io = { version = "7.0.0", path = "../../primitives/io", default-features = false}
+sp-runtime = { version = "7.0.0", default-features = false, path = "../../primitives/runtime"}
+sp-std = { version = "5.0.0",path = "../../primitives/std", default-features = false }
+# Substrate FRAME
+frame-support = { version = "4.0.0-dev", path = "../../frame/support",default-features = false}
+frame-system = { version = "4.0.0-dev", path = "../../frame/system", default-features = false }
+
+pallet-timestamp = { version = "4.0.0-dev", path = "../../frame/timestamp",default-features = false }
+
+# Frontier
+fp-consensus = { version = "2.0.0-dev", path = "../../evm-primitives/consensus", default-features = false }
+fp-ethereum = { version = "1.0.0-dev", path = "../../evm-primitives/ethereum", default-features = false }
+fp-evm = { version = "3.0.0-dev", path = "../../evm-primitives/evm", default-features = false }
+fp-rpc = { version = "3.0.0-dev", path = "../../evm-primitives/rpc", default-features = false }
+fp-self-contained = { version = "1.0.0-dev", path = "../../evm-primitives/self-contained", default-features = false }
+fp-storage = { version = "2.0.0", path = "../../evm-primitives/storage", default-features = false }
+pallet-evm = { version = "6.0.0-dev", path = "../evm", default-features = false }
+
+[dev-dependencies]
+hex = "0.4.3"
+libsecp256k1 = { version = "0.7.1", features = ["static-context", "hmac"] }
+# Substrate
+sp-core = { version = "7.0.0", path = "../../primitives/core", default-features = false}
+# Substrate FRAME
+pallet-balances = { version = "4.0.0-dev", path = "../../frame/balances", default-features = false}
+[features]
+default = ["std"]
+std = [
+	"ethereum/std",
+	"evm/std",
+	"ethereum-types/std",
+	"rlp/std",
+	"scale-codec/std",
+	"scale-info/std",
+	# Substrate
+	"frame-support/std",
+	"frame-system/std",
+	"pallet-timestamp/std",
+	"sp-io/std",
+	"sp-runtime/std",
+	"sp-std/std",
+	# Frontier
+	"fp-consensus/std",
+	"fp-ethereum/std",
+	"fp-evm/std",
+	"fp-rpc/std",
+	"fp-self-contained/std",
+	"fp-storage/std",
+	"pallet-evm/std",
+	"pallet-balances/std",
+]
+runtime-benchmarks = [
+	"frame-support/runtime-benchmarks",
+	"frame-system/runtime-benchmarks",
+	"pallet-timestamp/runtime-benchmarks",
+	"pallet-evm/runtime-benchmarks",
+]
+try-runtime = [
+	"frame-support/try-runtime",
+	"frame-system/try-runtime",
+	"pallet-timestamp/try-runtime",
+	"pallet-evm/try-runtime",
+]
+forbid-evm-reentrancy = ["pallet-evm/forbid-evm-reentrancy"]

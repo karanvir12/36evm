@@ -1,5 +1,5 @@
 [package]
-name = "kitchensink-runtime"
+name = "node-5ire-runtime"
 version = "3.0.0-dev"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate node kitchensink runtime."
@@ -111,6 +111,27 @@ pallet-uniques = { version = "4.0.0-dev", default-features = false, path = "../.
 pallet-vesting = { version = "4.0.0-dev", default-features = false, path = "../../../frame/vesting" }
 pallet-whitelist = { version = "4.0.0-dev", default-features = false, path = "../../../frame/whitelist" }
 
+
+
+
+# Frontier
+fp-rpc = {version="3.0.0-dev", path = "../../../evm-primitives/rpc", default-features = false }
+fp-self-contained = {version="1.0.0-dev", path = "../../../evm-primitives/self-contained", default-features = false }
+
+
+# Frontier FRAME
+pallet-base-fee = {version="1.0.0", path = "../../../evm-frame/base-fee", default-features = false }
+pallet-dynamic-fee = {version = "4.0.0-dev", path = "../../../evm-frame/dynamic-fee", default-features = false }
+pallet-ethereum = {version = "4.0.0-dev", path = "../../../evm-frame/ethereum", default-features = false }
+pallet-evm = { version="6.0.0-dev", path = "../../../evm-frame/evm", default-features = false }
+pallet-evm-precompile-modexp = {version = "2.0.0-dev", path = "../../../evm-frame/evm/precompile/modexp", default-features = false }
+pallet-evm-precompile-sha3fips = {version = "2.0.0-dev", path = "../../../evm-frame/evm/precompile/sha3fips", default-features = false }
+pallet-evm-precompile-simple = {version = "2.0.0-dev", path = "../../../evm-frame/evm/precompile/simple", default-features = false }
+pallet-hotfix-sufficients = {version = "1.0.0", path = "../../../evm-frame/hotfix-sufficients", default-features = false }
+pallet-evm-chain-id = { version = "1.0.0-dev", path = "../../../evm-frame/evm-chain-id", default-features = false }
+
+
+
 [build-dependencies]
 substrate-wasm-builder = { version = "5.0.0-dev", path = "../../../utils/wasm-builder" }
 
@@ -203,6 +224,20 @@ std = [
 	"sp-io/std",
 	"pallet-child-bounties/std",
 	"pallet-alliance/std",
+
+     #frontier
+	'fp-rpc/std',
+    'fp-self-contained/std',
+    'pallet-base-fee/std',
+    'pallet-dynamic-fee/std',
+    'pallet-ethereum/std',
+    'pallet-evm/std',
+    'pallet-evm-precompile-simple/std',
+    'pallet-evm-precompile-sha3fips/std',
+	"pallet-evm-precompile-simple/std",
+	"pallet-evm-chain-id/std",
+
+
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
@@ -256,6 +291,15 @@ runtime-benchmarks = [
 	"pallet-vesting/runtime-benchmarks",
 	"pallet-whitelist/runtime-benchmarks",
 	"frame-system-benchmarking/runtime-benchmarks",
+
+    'pallet-evm/runtime-benchmarks',
+	'pallet-ethereum/runtime-benchmarks',
+    'pallet-evm/runtime-benchmarks',
+	"pallet-hotfix-sufficients/runtime-benchmarks",
+
+
+
+
 ]
 try-runtime = [
 	"frame-try-runtime/try-runtime",

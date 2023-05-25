@@ -1,0 +1,17 @@
+[package]
+name = "fc-rpc-core"
+version = "1.1.0-dev"
+license = "GPL-3.0-or-later WITH Classpath-exception-2.0"
+edition = "2021"
+description = "RPC traits of Ethereum."
+ 
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+ethereum = { version = "0.14.0", default-features = false }
+ethereum-types = { version = "0.14.1", default-features = false }
+jsonrpsee = "0.16.2"
+rustc-hex = "2.1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

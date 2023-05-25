@@ -1,0 +1,51 @@
+[package]
+name = "pallet-dynamic-fee"
+version = "4.0.0-dev"
+license = "Apache-2.0"
+edition = "2021"
+description = "Dynamic fee handling for EVM."
+ 
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+scale-codec = { package = "parity-scale-codec", version = "3.2.1", default-features = false, features = ["derive"] }
+scale-info = { version = "2.3.1", default-features = false, features = ["derive"] }
+# Substrate
+sp-core = { version = "7.0.0", path = "../../primitives/core", default-features = false }
+sp-inherents = { version = "4.0.0-dev", path = "../../primitives/inherents", default-features = false }
+sp-runtime = { version = "7.0.0", default-features = false, path = "../../primitives/runtime" }
+sp-std = { version = "5.0.0",path = "../../primitives/std", default-features = false }
+# Substrate FRAME
+frame-support = { version = "4.0.0-dev", path = "../../frame/support" , default-features = false }
+frame-system = { version = "4.0.0-dev", path = "../../frame/system", default-features = false }
+# Frontier
+fp-dynamic-fee = { version = "1.0.0", path = "../../evm-primitives/dynamic-fee", default-features = false }
+fp-evm = { version = "3.0.0-dev", path = "../../evm-primitives/evm", default-features = false }
+
+[dev-dependencies]
+# Substrate
+pallet-timestamp = { version = "4.0.0-dev", path = "../../frame/timestamp" }
+sp-io = { version = "7.0.0", path = "../../primitives/io", default-features = false}
+
+[features]
+default = ["std"]
+std = [
+	"scale-codec/std",
+	"scale-info/std",
+	# Substrate
+	"sp-core/std",
+	"sp-inherents/std",
+	"sp-runtime/std",
+	"sp-std/std",
+	# Substrate
+	"frame-system/std",
+	"frame-support/std",
+	# Frontier
+	"fp-dynamic-fee/std",
+	"fp-evm/std",
+]
+try-runtime = [
+	"frame-support/try-runtime",
+	"frame-system/try-runtime",
+]

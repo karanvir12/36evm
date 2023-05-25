@@ -1,0 +1,27 @@
+[package]
+name = "pallet-evm-precompile-bn128"
+version = "2.0.0-dev"
+license = "Apache-2.0"
+edition = "2021"
+description = "BN128 precompiles for EVM pallet."
+ 
+[dependencies]
+bn = { package = "substrate-bn", version = "0.6", default-features = false }
+# Substrate
+sp-core = { version = "7.0.0", path = "../../../../primitives/core", default-features = false }
+
+# Frontier
+fp-evm = { version = "3.0.0-dev", path = "../../../../evm-primitives/evm", default-features = false }
+
+[dev-dependencies]
+# Frontier
+pallet-evm-test-vector-support = { version = "1.0.0-dev", path = "../../test-vector-support",default-features = false }
+
+[features]
+default = ["std"]
+std = [
+	# Substrate
+	"sp-core/std",
+	# Frontier
+	"fp-evm/std",
+]

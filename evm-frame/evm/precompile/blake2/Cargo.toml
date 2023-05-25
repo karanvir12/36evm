@@ -1,0 +1,20 @@
+[package]
+name = "pallet-evm-precompile-blake2"
+version = "2.0.0-dev"
+license = "Apache-2.0"
+edition = "2021"
+description = "BLAKE2 precompiles for EVM pallet."
+ 
+[dependencies]
+# Frontier
+fp-evm = { version = "3.0.0-dev", path = "../../../../evm-primitives/evm", default-features = false }
+
+[dev-dependencies]
+pallet-evm-test-vector-support = { version = "1.0.0-dev", path = "../../test-vector-support",default-features = false }
+
+[features]
+default = ["std"]
+std = [
+	# Frontier
+	"fp-evm/std",
+]

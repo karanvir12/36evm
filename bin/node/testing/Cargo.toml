@@ -21,7 +21,7 @@ tempfile = "3.1.0"
 frame-system = { version = "4.0.0-dev", path = "../../../frame/system" }
 node-executor = { version = "3.0.0-dev", path = "../executor" }
 node-primitives = { version = "2.0.0", path = "../primitives" }
-kitchensink-runtime = { version = "3.0.0-dev", path = "../runtime" }
+node-5ire-runtime = { version = "3.0.0-dev", path = "../runtime" }
 pallet-assets = { version = "4.0.0-dev", path = "../../../frame/assets" }
 pallet-asset-tx-payment = { version = "4.0.0-dev", path = "../../../frame/transaction-payment/asset-tx-payment" }
 pallet-transaction-payment = { version = "4.0.0-dev", path = "../../../frame/transaction-payment" }
@@ -45,3 +45,24 @@ sp-keyring = { version = "7.0.0", path = "../../../primitives/keyring" }
 sp-runtime = { version = "7.0.0", path = "../../../primitives/runtime" }
 sp-timestamp = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/timestamp" }
 substrate-test-client = { version = "2.0.0", path = "../../../test-utils/client" }
+
+
+
+
+
+
+# Frontier
+
+# Frontier
+fc-cli = { path = "../../../evm-client/cli" }
+fc-consensus = { path = "../../../evm-client/consensus" }
+fc-db = { path = "../../../evm-client/db" }
+fc-mapping-sync = { path = "../../../evm-client/mapping-sync" }
+fc-rpc = { path = "../../../evm-client/rpc" }
+fc-rpc-core = { path = "../../../evm-client/rpc-core" }
+fp-consensus = { path = "../../../evm-primitives/consensus" }
+fp-dynamic-fee = { path = "../../../evm-primitives/dynamic-fee" }
+fp-evm = { path = "../../../evm-primitives/evm" }
+fp-rpc = { path = "../../../evm-primitives/rpc" }
+fp-storage = { path = "../../../evm-primitives/storage" }
+fp-self-contained = {version="1.0.0-dev", path = "../../../evm-primitives/self-contained", default-features = false }

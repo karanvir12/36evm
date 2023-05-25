@@ -1,0 +1,23 @@
+[package]
+name = "fc-mapping-sync"
+version = "2.0.0-dev"
+license = "GPL-3.0-or-later WITH Classpath-exception-2.0"
+edition = "2021"
+description = "Mapping sync logic for Frontier."
+ 
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+futures = "0.3.25"
+futures-timer = "3.0.1"
+log = "0.4.17"
+# Substrate
+sc-client-api = { version = "4.0.0-dev", path = "../../client/api" }
+sp-api = { version = "4.0.0-dev", path = "../../primitives/api" }
+sp-blockchain = { version = "4.0.0-dev", path = "../../primitives/blockchain" }
+sp-runtime = { version = "7.0.0", path = "../../primitives/runtime" }
+# Frontier
+fc-db = { path = "../db" }
+fp-consensus = { version = "2.0.0-dev", path = "../../evm-primitives/consensus" }
+fp-rpc = { version = "3.0.0-dev", path = "../../evm-primitives/rpc" }
