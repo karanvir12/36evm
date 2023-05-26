@@ -23,7 +23,7 @@ use crate::{
 	Cli, Subcommand,
 };
 use frame_benchmarking_cli::*;
-use node_5ire_runtime::{ExistentialDeposit, RuntimeApi};
+use node_peer_runtime::{ExistentialDeposit, RuntimeApi};
 use node_executor::ExecutorDispatch;
 use node_primitives::Block;
 use sc_cli::{ChainSpec, Result, RuntimeVersion, SubstrateCli};
@@ -34,7 +34,7 @@ use std::sync::Arc;
 
 impl SubstrateCli for Cli {
 	fn impl_name() -> String {
-		"Substrate Node".into()
+		"Peer Node".into()
 	}
 
 	fn impl_version() -> String {
@@ -50,7 +50,7 @@ impl SubstrateCli for Cli {
 	}
 
 	fn support_url() -> String {
-		"https://github.com/paritytech/substrate/issues/new".into()
+		"https://github.com/PEER-Inc/blockchain-peerissues/new".into()
 	}
 
 	fn copyright_start_year() -> i32 {
@@ -75,7 +75,7 @@ impl SubstrateCli for Cli {
 	}
 
 	fn native_runtime_version(_: &Box<dyn ChainSpec>) -> &'static RuntimeVersion {
-		&node_5ire_runtime::VERSION
+		&node_peer_runtime::VERSION
 	}
 }
 

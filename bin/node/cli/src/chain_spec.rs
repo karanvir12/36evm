@@ -19,7 +19,7 @@
 //! Substrate chain configurations.
 
 use grandpa_primitives::AuthorityId as GrandpaId;
-use node_5ire_runtime::{
+use node_peer_runtime::{
 	constants::currency::*, wasm_binary_unwrap, AuthorityDiscoveryConfig, BabeConfig,
 	BalancesConfig, Block, CouncilConfig, DemocracyConfig, ElectionsConfig, GrandpaConfig,
 	ImOnlineConfig, IndicesConfig, MaxNominations, NominationPoolsConfig, SessionConfig,
@@ -42,7 +42,7 @@ use sp_runtime::{
 use std::str::FromStr;
 use std::collections::BTreeMap;
 
-pub use node_5ire_runtime::GenesisConfig;
+pub use node_peer_runtime::GenesisConfig;
 pub use node_primitives::{AccountId, Balance, Signature};
 
 type AccountPublic = <Signature as Verify>::Signer;
@@ -187,8 +187,8 @@ fn staging_testnet_config_genesis() -> GenesisConfig {
 pub fn staging_testnet_config() -> ChainSpec {
 	let boot_nodes = vec![];
 	ChainSpec::from_genesis(
-		"Firechain Staging",
-		"Firechain_staging_network",
+		"Peer Staging",
+		"Peer_staging_network",
 		ChainType::Live,
 		staging_testnet_config_genesis,
 		boot_nodes,
@@ -199,7 +199,7 @@ pub fn staging_testnet_config() -> ChainSpec {
 		None,
 		None,
 		Some(
-			serde_json::from_str("{\"tokenDecimals\": 18, \"tokenSymbol\": \"5IRE\"}")
+			serde_json::from_str("{\"tokenDecimals\": 18, \"tokenSymbol\": \"Peer\"}")
 				.expect("Provided valid json map"),
 		),
 		Default::default(),
@@ -348,7 +348,7 @@ pub fn testnet_genesis(
 		sudo: SudoConfig { key: Some(root_key) },
 		babe: BabeConfig {
 			authorities: vec![],
-			epoch_config: Some(node_5ire_runtime::BABE_GENESIS_EPOCH_CONFIG),
+			epoch_config: Some(node_peer_runtime::BABE_GENESIS_EPOCH_CONFIG),
 		},
 		im_online: ImOnlineConfig { keys: vec![] },
 		authority_discovery: AuthorityDiscoveryConfig { keys: vec![] },
@@ -447,7 +447,7 @@ pub fn development_config() -> ChainSpec {
 		None,
 		None,
 		Some(
-			serde_json::from_str("{\"tokenDecimals\": 18, \"tokenSymbol\": \"5IRE\"}")
+			serde_json::from_str("{\"tokenDecimals\": 18, \"tokenSymbol\": \"Peer\"}")
 				.expect("Provided valid json map"),
 		),
 		Default::default(),
@@ -467,8 +467,8 @@ fn local_testnet_genesis() -> GenesisConfig {
 /// Local testnet config (multivalidator Alice + Bob)
 pub fn local_testnet_config() -> ChainSpec {
 	ChainSpec::from_genesis(
-		"Firechain Local Testnet",
-		"firechain_local_testnet",
+		"Peer Local Testnet",
+		"Peer_local_testnet",
 		ChainType::Local,
 		local_testnet_genesis,
 		vec![],
@@ -476,7 +476,7 @@ pub fn local_testnet_config() -> ChainSpec {
 		None,
 		None,
 		Some(
-			serde_json::from_str("{\"tokenDecimals\": 18, \"tokenSymbol\": \"5IRE\"}")
+			serde_json::from_str("{\"tokenDecimals\": 18, \"tokenSymbol\": \"Peer\"}")
 				.expect("Provided valid json map"),
 		),
 		Default::default(),

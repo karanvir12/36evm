@@ -160,13 +160,13 @@ test-deterministic-wasm:
   script:
     - rusty-cachier snapshot create
     # build runtime
-    - cargo build --locked --verbose --release -p node-5ire-runtime
+    - cargo build --locked --verbose --release -p node-peer-runtime
     # make checksum
-    - sha256sum $CARGO_TARGET_DIR/release/wbuild/node-5ire-runtime/target/wasm32-unknown-unknown/release/node_5ire_runtime.wasm > checksum.sha256
+    - sha256sum $CARGO_TARGET_DIR/release/wbuild/node-peer-runtime/target/wasm32-unknown-unknown/release/node_peer_runtime.wasm > checksum.sha256
     # clean up
     - rm -rf $CARGO_TARGET_DIR/release/wbuild
     # build again
-    - cargo build --locked --verbose --release -p node-5ire-runtime
+    - cargo build --locked --verbose --release -p node-peer-runtime
     # confirm checksum
     - sha256sum -c ./checksum.sha256
     # clean up again, don't put release binaries into the cache

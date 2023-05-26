@@ -36,7 +36,7 @@
 use std::{collections::BTreeMap, sync::Arc};
 
 use jsonrpsee::RpcModule;
-use node_5ire_runtime::{opaque::Block};
+use node_peer_runtime::{opaque::Block};
 use node_primitives::{AccountId, Balance, BlockNumber, Hash, Index};
 use sc_client_api::AuxStore;
 use sc_consensus_babe::{BabeConfiguration, Epoch};
@@ -293,7 +293,7 @@ BE::State: StateBackend<BlakeTwo256>,
 			client.clone(),
 			pp,
 			graph,
-			Some(node_5ire_runtime::TransactionConverter),
+			Some(node_peer_runtime::TransactionConverter),
 			network.clone(),
 			signers,
 			overrides.clone(),

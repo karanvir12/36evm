@@ -1,7 +1,7 @@
 [package]
 name = "node-cli"
 version = "3.0.0-dev"
-authors = ["peer"]
+authors = ["Peer Technologies"]
 build = "build.rs"
 description = "Generic Substrate node implementation in Rust."
 edition = "2021"
@@ -124,7 +124,7 @@ pallet-im-online = { version = "4.0.0-dev", default-features = false, path = "..
 frame-benchmarking = { version = "4.0.0-dev", default-features = false, optional = true, path = "../../../frame/benchmarking" }
 
 # node-specific dependencies
-node-5ire-runtime = { version = "3.0.0-dev", path = "../runtime" }
+node-peer-runtime = { version = "3.0.0-dev", path = "../runtime" }
 # node-rpc = { version = "3.0.0-dev", path = "../rpc" }
 node-primitives = { version = "2.0.0", path = "../primitives" }
 node-executor = { version = "3.0.0-dev", path = "../executor" }
@@ -197,14 +197,14 @@ cli = [
 	"frame-benchmarking/std",
 ]
 runtime-benchmarks = [
-	"node-5ire-runtime/runtime-benchmarks",
+	"node-peer-runtime/runtime-benchmarks",
 	"frame-benchmarking-cli/runtime-benchmarks",
 	"frame-benchmarking/runtime-benchmarks"
 ]
 # Enable features that allow the runtime to be tried and debugged. Name might be subject to change
 # in the near future.
 #rpc_binary_search_estimate = ["fc-rpc/rpc_binary_search_estimate"]
-try-runtime = ["node-5ire-runtime/try-runtime", "try-runtime-cli/try-runtime"]
+try-runtime = ["node-peer-runtime/try-runtime", "try-runtime-cli/try-runtime"]
 
 [[bench]]
 name = "transaction_pool"

@@ -22,7 +22,7 @@
 
 use crate::rpc::{create_full, BabeDeps, FullDeps, GrandpaDeps};
 use fc_db::Backend as FrontierBackend;
-use node_5ire_runtime::{self, opaque::Block, RuntimeApi};
+use node_peer_runtime::{self, opaque::Block, RuntimeApi};
 
 
 use codec::Encode;
@@ -30,7 +30,7 @@ use frame_system_rpc_runtime_api::AccountNonceApi;
 // use futures::prelude::*;
 // use node_executor::ExecutorDispatch;
 // use node_primitives::Block;
-// use node_5ire_runtime::RuntimeApi;
+// use node_peer_runtime::RuntimeApi;
 use sc_client_api::{BlockBackend, ExecutorProvider,BlockchainEvents};
 use sc_consensus_babe::{self, SlotProportion};
 pub use sc_executor::NativeElseWasmExecutor;
@@ -65,10 +65,10 @@ impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
     #[cfg(not(feature = "runtime-benchmarks"))]
     type ExtendHostFunctions = ();
     fn dispatch(method: &str, data: &[u8]) -> Option<Vec<u8>> {
-        node_5ire_runtime::api::dispatch(method, data)
+        node_peer_runtime::api::dispatch(method, data)
     }
     fn native_version() -> sc_executor::NativeVersion {
-        node_5ire_runtime::native_version()
+        node_peer_runtime::native_version()
     }
 }
 
@@ -105,7 +105,7 @@ pub(crate) fn db_config_dir(config: &Configuration) -> PathBuf {
 		.as_ref()
 		.map(|base_path| base_path.config_dir(config.chain_spec.id()))
 		.unwrap_or_else(|| {
-			BasePath::from_project("", "", "substrate-5irechain").config_dir(config.chain_spec.id())
+			BasePath::from_project("", "", "substrate-Peer").config_dir(config.chain_spec.id())
 		})
 }
 
@@ -118,41 +118,41 @@ pub(crate) fn db_config_dir(config: &Configuration) -> PathBuf {
 pub fn create_extrinsic(
 	client: &FullClient,
 	sender: sp_core::sr25519::Pair,
-	function: impl Into<node_5ire_runtime::RuntimeCall>,
+	function: impl Into<node_peer_runtime::RuntimeCall>,
 	nonce: Option<u32>,
-) -> node_5ire_runtime::UncheckedExtrinsic {
+) -> node_peer_runtime::UncheckedExtrinsic {
 	let function = function.into();
 	let genesis_hash = client.block_hash(0).ok().flatten().expect("Genesis block exists; qed");
 	let best_hash = client.chain_info().best_hash;
 	let best_block = client.chain_info().best_number;
 	let nonce = nonce.unwrap_or_else(|| fetch_nonce(client, sender.clone()));
 
-	let period = node_5ire_runtime::BlockHashCount::get()
+	let period = node_peer_runtime::BlockHashCount::get()
 		.checked_next_power_of_two()
 		.map(|c| c / 2)
 		.unwrap_or(2) as u64;
 	let tip = 0;
-	let extra: node_5ire_runtime::SignedExtra = (
-		frame_system::CheckNonZeroSender::<node_5ire_runtime::Runtime>::new(),
-		frame_system::CheckSpecVersion::<node_5ire_runtime::Runtime>::new(),
-		frame_system::CheckTxVersion::<node_5ire_runtime::Runtime>::new(),
-		frame_system::CheckGenesis::<node_5ire_runtime::Runtime>::new(),
-		frame_system::CheckEra::<node_5ire_runtime::Runtime>::from(generic::Era::mortal(
+	let extra: node_peer_runtime::SignedExtra = (
+		frame_system::CheckNonZeroSender::<node_peer_runtime::Runtime>::new(),
+		frame_system::CheckSpecVersion::<node_peer_runtime::Runtime>::new(),
+		frame_system::CheckTxVersion::<node_peer_runtime::Runtime>::new(),
+		frame_system::CheckGenesis::<node_peer_runtime::Runtime>::new(),
+		frame_system::CheckEra::<node_peer_runtime::Runtime>::from(generic::Era::mortal(
 			period,
 			best_block.saturated_into(),
 		)),
-		frame_system::CheckNonce::<node_5ire_runtime::Runtime>::from(nonce),
-		frame_system::CheckWeight::<node_5ire_runtime::Runtime>::new(),
-		pallet_asset_tx_payment::ChargeAssetTxPayment::<node_5ire_runtime::Runtime>::from(tip,None),
+		frame_system::CheckNonce::<node_peer_runtime::Runtime>::from(nonce),
+		frame_system::CheckWeight::<node_peer_runtime::Runtime>::new(),
+		pallet_asset_tx_payment::ChargeAssetTxPayment::<node_peer_runtime::Runtime>::from(tip,None),
 	);
 
-	let raw_payload = node_5ire_runtime::SignedPayload::from_raw(
+	let raw_payload = node_peer_runtime::SignedPayload::from_raw(
 		function.clone(),
 		extra.clone(),
 		(
 			(),
-			node_5ire_runtime::VERSION.spec_version,
-			node_5ire_runtime::VERSION.transaction_version,
+			node_peer_runtime::VERSION.spec_version,
+			node_peer_runtime::VERSION.transaction_version,
 			genesis_hash,
 			best_hash,
 			(),
@@ -162,10 +162,10 @@ pub fn create_extrinsic(
 	);
 	let signature = raw_payload.using_encoded(|e| sender.sign(e));
 
-	node_5ire_runtime::UncheckedExtrinsic::new_signed(
+	node_peer_runtime::UncheckedExtrinsic::new_signed(
 		function,
 		sp_runtime::AccountId32::from(sender.public()).into(),
-		node_5ire_runtime::Signature::Sr25519(signature),
+		node_peer_runtime::Signature::Sr25519(signature),
 		extra,
 	)
 }
@@ -749,7 +749,7 @@ mod tests {
 	use crate::service::{new_full_base, NewFullBase};
 	use codec::Encode;
 	use node_primitives::{Block, DigestItem, Signature};
-	use node_5ire_runtime::{
+	use node_peer_runtime::{
 		constants::{currency::CENTS, time::SLOT_DURATION},
 		Address, BalancesCall, RuntimeCall, UncheckedExtrinsic,
 	};

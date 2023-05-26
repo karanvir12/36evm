@@ -34,4 +34,4 @@ sp-consensus = { version = "0.10.0-dev", path = "../../primitives/consensus/comm
 sp-io = { version = "7.0.0", default-features = false, path = "../../primitives/io" }
 substrate-test-runtime-client = { version = "2.0.0", path = "../../test-utils/runtime/client" }
 # Frontier
-node-5ire-runtime = { version = "3.0.0-dev", path = "../../bin/node/runtime" }
+node-peer-runtime = { version = "3.0.0-dev", path = "../../bin/node/runtime" }

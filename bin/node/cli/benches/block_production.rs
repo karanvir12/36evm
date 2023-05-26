@@ -18,7 +18,7 @@
 
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion, Throughput};
 
-use node_5ire_runtime::{constants::currency::*, BalancesCall};
+use node_peer_runtime::{constants::currency::*, BalancesCall};
 use node_cli::service::{create_extrinsic, FullClient};
 use sc_block_builder::{BlockBuilderProvider, BuiltBlock, RecordProof};
 use sc_client_api::execution_extensions::ExecutionStrategies;
@@ -120,9 +120,9 @@ fn new_node(tokio_handle: Handle) -> node_cli::service::NewFullBase {
 }
 
 fn extrinsic_set_time(now: u64) -> OpaqueExtrinsic {
-	node_5ire_runtime::UncheckedExtrinsic {
+	node_peer_runtime::UncheckedExtrinsic {
 		signature: None,
-		function: node_5ire_runtime::RuntimeCall::Timestamp(pallet_timestamp::Call::set { now }),
+		function: node_peer_runtime::RuntimeCall::Timestamp(pallet_timestamp::Call::set { now }),
 	}
 	.into()
 }

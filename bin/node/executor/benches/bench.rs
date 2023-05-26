@@ -18,7 +18,7 @@
 use codec::{Decode, Encode};
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
 use frame_support::Hashable;
-use node_5ire_runtime::{
+use node_peer_runtime::{
 	constants::currency::*, Block, BuildStorage, CheckedExtrinsic, GenesisConfig, Header,
 	RuntimeCall, UncheckedExtrinsic,
 };
@@ -41,7 +41,7 @@ criterion_main!(benches);
 
 /// The wasm runtime code.
 pub fn compact_code_unwrap() -> &'static [u8] {
-	node_5ire_runtime::WASM_BINARY.expect(
+	node_peer_runtime::WASM_BINARY.expect(
 		"Development wasm binary is not available. Testing is only supported with the flag \
 		 disabled.",
 	)
@@ -49,9 +49,9 @@ pub fn compact_code_unwrap() -> &'static [u8] {
 
 const GENESIS_HASH: [u8; 32] = [69u8; 32];
 
-const TRANSACTION_VERSION: u32 = node_5ire_runtime::VERSION.transaction_version;
+const TRANSACTION_VERSION: u32 = node_peer_runtime::VERSION.transaction_version;
 
-const SPEC_VERSION: u32 = node_5ire_runtime::VERSION.spec_version;
+const SPEC_VERSION: u32 = node_peer_runtime::VERSION.spec_version;
 
 const HEAP_PAGES: u64 = 20;
 

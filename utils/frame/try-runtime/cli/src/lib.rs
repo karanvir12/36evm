@@ -190,10 +190,10 @@
 //! # this is like your WIP branch.
 //! cargo build --release --features try-runtime
 //! cp target/release/substrate substrate-try-runtime
-//! cp ./target/release/wbuild/node-5ire-runtime/node_5ire_runtime.wasm runtime-try-runtime.wasm
+//! cp ./target/release/wbuild/node-peer-runtime/node_peer_runtime.wasm runtime-try-runtime.wasm
 //! ```
 //!
-//! > The above example is with `substrate`'s `node-5ire-runtime`, but is applicable to any
+//! > The above example is with `substrate`'s `node-peer-runtime`, but is applicable to any
 //! > substrate-based chain that has implemented `try-runtime-cli`.
 //!
 //! * If you run `try-runtime` subcommand against `substrate` binary listed above, you get the
@@ -261,7 +261,7 @@
 //! # assuming there's `./substrate --dev --tmp --ws-port 9999` or similar running.
 //! ./substrate-try-runtime \
 //!     try-runtime \
-//!     --runtime node_5ire_runtime.wasm \
+//!     --runtime node_peer_runtime.wasm \
 //!     -lruntime=debug \
 //!     on-runtime-upgrade \
 //!     live --uri ws://localhost:9999
@@ -273,7 +273,7 @@
 //! ```bash
 //! ./substrate-try-runtime \
 //!     try-runtime \
-//!     --runtime node_5ire_runtime.wasm \
+//!     --runtime node_peer_runtime.wasm \
 //!     -lruntime=debug \
 //!     on-runtime-upgrade \
 //!     live --uri ws://localhost:9999 \

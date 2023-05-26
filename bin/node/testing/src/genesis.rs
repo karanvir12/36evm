@@ -19,7 +19,7 @@
 //! Genesis Configuration.
 
 use crate::keyring::*;
-use node_5ire_runtime::{
+use node_peer_runtime::{
 	constants::currency::*, wasm_binary_unwrap, AccountId, AssetsConfig, BabeConfig,
 	BalancesConfig, GenesisConfig, GrandpaConfig, IndicesConfig, SessionConfig, SocietyConfig,
 	StakerStatus, StakingConfig, SystemConfig, BABE_GENESIS_EPOCH_CONFIG,EVMConfig,EthereumConfig,EVMChainIdConfig,

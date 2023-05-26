@@ -19,7 +19,7 @@
 //! Test accounts.
 
 use codec::Encode;
-use node_5ire_runtime::{CheckedExtrinsic1, SessionKeys, SignedExtra, UncheckedExtrinsic1};
+use node_peer_runtime::{CheckedExtrinsic1, SessionKeys, SignedExtra, UncheckedExtrinsic1};
 use node_primitives::{AccountId, Balance, Index};
 use sp_keyring::{AccountKeyring, Ed25519Keyring, Sr25519Keyring};
 use sp_runtime::generic::Era;

@@ -1,7 +1,7 @@
 [package]
 name = "pallet-evm-precompile-curve25519"
 version = "1.0.0-dev"
-authors = ["5ireChain", "Drew Stone <drew@webb.tools>"]
+authors = ["Peer", "Drew Stone <drew@webb.tools>"]
 license = "Apache-2.0"
 edition = "2021"
 description = "Curve25519 elliptic curve precompiles for EVM pallet."
